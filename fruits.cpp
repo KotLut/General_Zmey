@@ -18,18 +18,19 @@ struct Fruit
     int weight;
     int invert_control;
     int invent_head_to_tail;
+    char name;
 };
 
 fruits = std::vector <Fruit>
 {
-    Fruit Apple(1, 0, 0, 0, 0),
-    Fruit Plum(-1, 0, 0, 0, 0),
-    Fruit Grape(0, 1, 0, 0, 0),
-    Fruit Banana(0, -1, 0, 0, 0),
-    Fruit Melon(0, 0, 1, 0, 0),
-    Fruit Peach(0, 0, -1, 0, 0),
-    Fruit Coconut(0, 0, 0, 1, 0),
-    Fruit Durian(0, 0, 0, 0, 1)
+    Fruit Apple(1, 0, 0, 0, 0, 'A'),
+    Fruit Plum(-1, 0, 0, 0, 0, 'P'),
+    Fruit Grape(0, 1, 0, 0, 0, 'G'),
+    Fruit Banana(0, -1, 0, 0, 0, 'B'),
+    Fruit Melon(0, 0, 1, 0, 0, 'M'),
+    Fruit Peach(0, 0, -1, 0, 0, 'P'),
+    Fruit Coconut(0, 0, 0, 1, 0, 'C'),
+    Fruit Durian(0, 0, 0, 0, 1, 'D')
 }
 
 Fruit random_fruit() {
