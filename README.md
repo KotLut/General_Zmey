@@ -14,3 +14,31 @@ This is a repository for teamwork on a game.
     обнаружение столкновений (со стеной, самим собой);
 
     подсчёт очков.
+
+Дополнение к игре:
+
+    Увелечение\уменьшение скорости змеи;
+
+    Инверсия головы и хвоста змеи;
+
+    Выбор скорости игры;
+
+    Разнообразие "еды"
+
+Как собрать игру:
+
+    1. Запустите терминал 
+
+    2. Перейдите в директорию с файлом
+    
+    3. Выполните
+        sudo apt update && sudo apt install libncurses5-dev libncursesw5-dev (Ubuntu/Debian)
+        
+        sudo dnf install ncurses-devel (Fedora)
+
+        sudo pacman -S ncurses (Arch)
+
+        brew install ncurses (Mac)
+
+    4. Выполните следующий код 
+        g++ main.cpp  -lncurses -o game && ./game (необходим компилятор)
