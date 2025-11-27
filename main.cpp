@@ -1,10 +1,14 @@
-#include <ncurses.h>
+#include <ncurses.h>  // include
 #include <unistd.h>
 #include <vector>
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
+
+using namespace std; // std
 
 
-using namespace std;
+// start constant
 
 const int WIDTH = 20;
 const int HEIGHT = 10;
@@ -14,7 +18,7 @@ pair<int, int> food;
 int score = 0;
 int speed = 200;
 
-void setup() {
+void setup() { // global setup
 
     cout << "Set Speed, 1 - max, 5 - min" << endl;
     cin >> speed;
@@ -23,12 +27,12 @@ void setup() {
     if (speed > 5) speed = 5;
 
 
-    initscr();
+    initscr();          // update and clear
     curs_set(0);
     noecho();
     cbreak();
-    keypad(stdscr, TRUE);
-    timeout(speed * 100);
+    keypad(stdscr, TRUE);  // arrows
+    timeout(speed * 10);    // speed
 
     // spavn snake and food
     snake.push_back(make_pair(HEIGHT / 2, WIDTH / 2));
@@ -40,7 +44,7 @@ void setup() {
 void draw() {
     clear();
 
-    // paint board
+    // draw  board
     for (int i = 0; i < WIDTH + 2; i++) {
         mvprintw(0, i, "-");
         mvprintw(HEIGHT + 1, i, "-");
@@ -50,12 +54,12 @@ void draw() {
         mvprintw(i, WIDTH + 1, "|");
     }
 
-    // paint shake
+    // draw snake
     for (const auto& p : snake) {
         mvprintw(p.first + 1, p.second + 1, "O");
     }
 
-    // paint food
+    // place food
     mvprintw(food.first + 1, food.second + 1, "F");
 
     // score
@@ -97,30 +101,28 @@ bool game() {
     int new_y = snake[0].first + dir_y;
     int new_x = snake[0].second + dir_x;
 
-    // boom dead with board
+    // boom dead via board
     if (new_x < 0 || new_x >= WIDTH || new_y < 0 || new_y >= HEIGHT) {
         return false;
     }
 
-    // boom dead with boady
+    // boom dead via body
     for (size_t i = 1; i < snake.size(); i++) {
         if (new_y == snake[i].first && new_x == snake[i].second) {
             return false;
         }
     }
 
-    // add new hend
+    // add new head
     snake.insert(snake.begin(), make_pair(new_y, new_x));
 
-    // add new food food
+    // add new food
     if (new_y == food.first && new_x == food.second) {
         score += 10;
         food = make_pair(rand() % HEIGHT, rand() % WIDTH);
     } else {
         snake.pop_back();
     }
-
-
 
     return true;
 }
@@ -133,7 +135,7 @@ int main() {
         input();
     }
 
-    endwin(); // return term
+    endwin(); // return result
     cout << "GAME OVER! Final Score: " << score << endl;
     return 0;
 }
